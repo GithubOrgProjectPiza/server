@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GithubOrgProjectPiza/server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GithubOrgProjectPiza/server/issues"
+  },
+  "homepage": "https://github.com/GithubOrgProjectPiza/server#readme",
+  "dependencies": {
+    "typescript": "^4.5.5"
+  }
+}
