@@ -11,37 +11,44 @@ datasource db {
 }
 
 model User {
-    id    Int    @id @default(autoincrement())
-    email String @unique
-    role  Role   @default(USER)
-    orders Order[]
+  id     Int     @id @default(autoincrement())
+  email  String  @unique
+  role   Role    @default(USER)
+  orders Order[]
 }
 
 model Restaurant {
-    id          Int     @id @default(autoincrement())
-    name        String  @unique
-    description String?
-    pizzas Pizza[]
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  description String?
+  pizzas      Pizza[]
 }
 
 model Pizza {
-    id          Int     @id @default(autoincrement())
-    name        String  @unique
-    description String?
-    restaurant Restaurant @relation(fields: [restaurantId], references: [id])
-    restaurantId Int
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  description  String?
+  restaurant   Restaurant     @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  orders       PizzatoOrder[]
 }
 
 model Order {
-    id Int @id @default(autoincrement())
-    user User @relation(fields: [userId], references: [id])
-    userId Int
-    pizza Pizza @relation(fields: [pizzaId], references: [id])
-    pizzaId Int
-    amount Int
+  id     Int            @id @default(autoincrement())
+  user   User           @relation(fields: [userId], references: [id])
+  userId Int
+  pizzas PizzatoOrder[]
+}
+
+model PizzatoOrder {
+  id      Int   @id @default(autoincrement())
+  order   Order @relation(fields: [orderId], references: [id])
+  orderId Int
+  pizza   Pizza @relation(fields: [pizzaId], references: [id])
+  pizzaId Int
 }
 
 enum Role {
-    USER
-    ADMIN
+  USER
+  ADMIN
 }
