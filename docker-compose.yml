@@ -1,0 +1,7 @@
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=server
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
