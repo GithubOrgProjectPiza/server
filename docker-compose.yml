@@ -10,3 +10,16 @@ services:
     container_name: "postfix"
     volumes:
       - ./host/keys/:/etc/opendkim/keys
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=server
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
