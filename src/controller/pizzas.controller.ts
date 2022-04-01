@@ -3,8 +3,8 @@ import { HttpStatusCodes } from "../statusCodes";
 import { DataType } from "../datatypes";
 import prisma from "../lib/prisma.lib";
 
-export const addOrganization = async (req: Request, res: Response) => {
-  if (typeof req.body.name !== "string" || typeof req.body.domain !== "string") {
+export const addPizza = async (req: Request, res: Response) => {
+  if (typeof req.body.name !== "string" || typeof req.body.description !== "string") {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
       description: DataType.STRING,
@@ -12,24 +12,24 @@ export const addOrganization = async (req: Request, res: Response) => {
     return;
   }
 
-  const organization = await prisma.organization.create({
+  const pizza = await prisma.pizza.create({
     data: {
       name: req.body.name,
-      domain: req.body.domain
-    }
+      restaurantId: -1
+    },
   });
 
-  res.status(HttpStatusCodes.CREATED).json(organization);
+  res.status(HttpStatusCodes.CREATED).json(pizza);
 };
 
-export const updateOrganization = async (req: Request, res: Response) => {
+export const updatePizza = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
 
   if (Number.isNaN(id)) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       id: DataType.NUMBER,
     });
-  } else if (typeof req.body.name !== "string" || typeof req.body.domain !== "string") {
+  } else if (typeof req.body.name !== "string" || typeof req.body.description !== "string") {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
       description: DataType.STRING,
@@ -37,20 +37,20 @@ export const updateOrganization = async (req: Request, res: Response) => {
     return;
   }
 
-  const organization = await prisma.organization.update({
+  const pizza = await prisma.pizza.update({
     where: {
       id: id,
     },
     data: {
       name: req.body.name,
-      domain: req.body.domain
+      description: req.body.description,
     },
   });
 
-  res.status(HttpStatusCodes.OK).json(organization);
+  res.status(HttpStatusCodes.OK).json(pizza);
 };
 
-export const deleteOrganization = async (req: Request, res: Response) => {
+export const deletePizza = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
 
   if (Number.isNaN(id)) {
@@ -59,7 +59,7 @@ export const deleteOrganization = async (req: Request, res: Response) => {
     });
   }
 
-  await prisma.organization.delete({
+  await prisma.pizza.delete({
     where: {
       id: id,
     }
@@ -68,7 +68,7 @@ export const deleteOrganization = async (req: Request, res: Response) => {
   res.status(HttpStatusCodes.NO_CONTENT).json();
 };
 
-export const getOrganization = async (req: Request, res: Response) => {
+export const getPizza = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
 
   if (Number.isNaN(id)) {
@@ -77,11 +77,11 @@ export const getOrganization = async (req: Request, res: Response) => {
     });
   }
 
-  const organization = await prisma.restaurant.findUnique({
+  const pizza = await prisma.pizza.findUnique({
     where: {
-      id: id,
+      id: id
     }
   });
 
-  res.status(HttpStatusCodes.OK).json(organization);
+  res.status(HttpStatusCodes.OK).json(pizza);
 };

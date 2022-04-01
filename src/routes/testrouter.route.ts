@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { sayHello } from "../controller/testcontroller.controller";
-import { addRestaurant, updateRestaurant, deleteRestaurant } from "../controller/restaurants.controller";
+import { addOrder, updateOrder, deleteOrder } from "../controller/orders.controller";
 
 const router = express.Router();
 
@@ -9,8 +9,8 @@ router.get("/", (request: Request, response: Response) => {
 });
 
 router.post("/test1", sayHello);
-router.post("/addtest/", addRestaurant);
-router.put("/updatetest/:id", updateRestaurant);
-router.delete("/deletetest/:id", deleteRestaurant);
+router.post("/addtest/", addOrder);
+router.put("/updatetest/:id", updateOrder);
+router.delete("/deletetest/:id", deleteOrder);
 
 module.exports = router;

@@ -79,7 +79,7 @@ export const getRestaurant = async (req: Request, res: Response) => {
 
   const restaurant = await prisma.restaurant.findUnique({
     where: {
-      id: id,
+      id: id
     }
   });
 
