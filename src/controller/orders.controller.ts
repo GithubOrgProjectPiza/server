@@ -4,23 +4,21 @@ import { DataType } from "../datatypes";
 import prisma from "../lib/prisma.lib";
 
 export const addOrder = async (req: Request, res: Response) => {
-  const userId = Number(req.body.userId);
-  
-  if (Number.isNaN(userId)) {
+  if (typeof req.body.userId !== "number" || !Array.isArray(req.body.pizzas)) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       userId: DataType.NUMBER,
-      //???
+      pizzas: DataType.ARRAY,
     });
     return;
   }
 
-console.log(req.body.pizzas);
+  console.log(req.body.pizzas);
 
   const order = await prisma.order.create({
     data: {
-     userId: req.body.userId,
-     //???
-    }
+      userId: req.body.userId,
+      pizzas: req.body.pizzas,
+    },
   });
 
   res.status(HttpStatusCodes.CREATED).json(order);
@@ -33,10 +31,10 @@ export const updateOrder = async (req: Request, res: Response) => {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       id: DataType.NUMBER,
     });
-  } else if (typeof req.body.userId !== "string") {
+  } else if (typeof req.body.userId !== "string" || !Array.isArray(req.body.pizzas)) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
-     //???
+      pizzas: DataType.ARRAY,
     });
     return;
   }
@@ -47,7 +45,7 @@ export const updateOrder = async (req: Request, res: Response) => {
     },
     data: {
       userId: req.body.userId,
-      //???
+      pizzas: req.body.pizzas,
     },
   });
 
@@ -66,7 +64,7 @@ export const deleteOrder = async (req: Request, res: Response) => {
   await prisma.order.delete({
     where: {
       id: id,
-    }
+    },
   });
 
   res.status(HttpStatusCodes.NO_CONTENT).json();
@@ -84,7 +82,7 @@ export const getOrder = async (req: Request, res: Response) => {
   const order = await prisma.restaurant.findUnique({
     where: {
       id: id,
-    }
+    },
   });
 
   res.status(HttpStatusCodes.OK).json(order);

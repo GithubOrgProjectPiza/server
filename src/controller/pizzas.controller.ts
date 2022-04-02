@@ -4,10 +4,11 @@ import { DataType } from "../datatypes";
 import prisma from "../lib/prisma.lib";
 
 export const addPizza = async (req: Request, res: Response) => {
-  if (typeof req.body.name !== "string" || typeof req.body.description !== "string") {
+  if (typeof req.body.name !== "string" || typeof req.body.description !== "string" || typeof req.body.restaurantId !== "number") {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
       description: DataType.STRING,
+      restaurantId: DataType.NUMBER
     });
     return;
   }
@@ -15,7 +16,8 @@ export const addPizza = async (req: Request, res: Response) => {
   const pizza = await prisma.pizza.create({
     data: {
       name: req.body.name,
-      restaurantId: -1
+      description: req.body.description,
+      restaurantId: req.body.restaurantId
     },
   });
 
@@ -29,10 +31,11 @@ export const updatePizza = async (req: Request, res: Response) => {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       id: DataType.NUMBER,
     });
-  } else if (typeof req.body.name !== "string" || typeof req.body.description !== "string") {
+  } else if (typeof req.body.name !== "string" || typeof req.body.description !== "string" || typeof req.body.restaurantId !== "number") {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
       description: DataType.STRING,
+      restaurantId: DataType.NUMBER
     });
     return;
   }

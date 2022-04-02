@@ -1,4 +1,5 @@
 export const DataType = {
   STRING: "String",
-  NUMBER: "Number"
+  NUMBER: "Number",
+  ARRAY: "Array",
 };
