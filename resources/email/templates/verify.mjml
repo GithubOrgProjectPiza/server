@@ -1,0 +1,32 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="20px" color="#6FB98F" font-family="helvetica" align="center">
+          πzza verification Email
+        </mj-text>
+
+        <mj-divider border-color="#6FB98F"></mj-divider>
+
+        <mj-text font-size="20px" color="#333" font-family="helvetica" align="center"
+          >Vielen Dank für deine Registrierung!<br />
+          Bitte klicke nun auf diesen Button,<br />
+          um den Konto zu bestätigen.</mj-text
+        >
+
+        <mj-button
+          background-color="#6FB98F"
+          font-family="helvetica"
+          font-size="20px"
+          border-radius="10px"
+          href="{{link}}"
+          >Hier Clicken</mj-button
+        >
+
+        <mj-text font-size="20px" color="#333" font-family="helvetica" align="center"
+          >Mit Freundlichen grüßen dein πzza Team</mj-text
+        >
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

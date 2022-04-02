@@ -16,6 +16,7 @@ model User {
   passwordHash   String
   passwordSalt   String
   role           Role         @default(USER)
+  status         Status       @default(UNVERIFIED)
   organization   Organization @relation(fields: [organizationId], references: [id])
   organizationId Int
   orders         Order[]
@@ -62,4 +63,9 @@ model Organization {
 enum Role {
   USER
   ADMIN
+}
+enum Status {
+  UNVERIFIED
+  VERIFIED
+  ENABLED
 }
