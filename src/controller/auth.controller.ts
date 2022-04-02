@@ -6,6 +6,8 @@ import { createDefaultError, createDefaultSucces } from "../lib/standardResponse
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { emailClient } from "../lib/redis.lib";
+import { nanoid } from "nanoid";
+import { verificationMail } from "../lib/mail";
 
 const JWT_SECRET = process.env.jwtsecret || "secret";
 
@@ -71,7 +73,11 @@ export const register = async (req: Request, res: Response) => {
     },
   });
 
-  (await emailClient).set(name, "salty");
+  const usid = nanoid();
+
+  (await emailClient).set(usid, user.id);
+
+  verificationMail(name, usid);
 
   res.status(201).json(createDefaultSucces("User created succesfully", user));
 };
@@ -106,4 +112,31 @@ export const authenthicate = async (req: Request, res: Response) => {
   };
 
   req.headers.authorization = jwt.sign(userjwt, JWT_SECRET);
+};
+
+export const verifyEmail = async (req: Request, res: Response) => {
+  const { code } = req.body || {};
+
+  if (!(typeof code === "string")) {
+    return res.status(400).json(
+      createDefaultError("Request body does not match required parameters", {
+        code: "string",
+      })
+    );
+  }
+
+  const acc: number | undefined = emailClient.get(code);
+
+  if (!acc) {
+    return res.status(404).json(createDefaultError("The code is invalid", {}));
+  }
+
+  const user = prisma.user.update({
+    where: {
+      id: acc,
+    },
+    data: {
+      status: Status.VERIFIED,
+    },
+  });
 };
