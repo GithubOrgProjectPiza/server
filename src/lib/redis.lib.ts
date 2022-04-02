@@ -14,4 +14,6 @@ const email: redis.RedisClientType = createClient({
   url: "redis://localhost:6379",
 });
 
+email.connect();
+
 export const emailClient = createAsyncClient(email);
