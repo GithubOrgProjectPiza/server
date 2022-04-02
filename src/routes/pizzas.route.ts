@@ -1,5 +1,5 @@
-import express, { Request, Response } from "express";
-import { addPizza, deletePizza, getPizza, updatePizza } from "..///controller/pizzas.controller";
+import express from "express";
+import { addPizza, deletePizza, getPizza, updatePizza } from "../controller/pizzas.controller";
 
 const router = express.Router();
 

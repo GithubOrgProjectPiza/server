@@ -1,5 +1,10 @@
-import express, { Request, Response } from "express";
-import { addOrganization, deleteOrganization, getOrganization, updateOrganization } from "../controller/organisations.controller";
+import express from "express";
+import {
+  addOrganization,
+  deleteOrganization,
+  getOrganization,
+  updateOrganization,
+} from "../controller/organisations.controller";
 
 const router = express.Router();
 

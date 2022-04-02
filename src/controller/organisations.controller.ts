@@ -15,8 +15,8 @@ export const addOrganization = async (req: Request, res: Response) => {
   const organization = await prisma.organization.create({
     data: {
       name: req.body.name,
-      domain: req.body.domain
-    }
+      domain: req.body.domain,
+    },
   });
 
   res.status(HttpStatusCodes.CREATED).json(organization);
@@ -43,7 +43,7 @@ export const updateOrganization = async (req: Request, res: Response) => {
     },
     data: {
       name: req.body.name,
-      domain: req.body.domain
+      domain: req.body.domain,
     },
   });
 
@@ -62,7 +62,7 @@ export const deleteOrganization = async (req: Request, res: Response) => {
   await prisma.organization.delete({
     where: {
       id: id,
-    }
+    },
   });
 
   res.status(HttpStatusCodes.NO_CONTENT).json();
@@ -80,7 +80,7 @@ export const getOrganization = async (req: Request, res: Response) => {
   const organization = await prisma.restaurant.findUnique({
     where: {
       id: id,
-    }
+    },
   });
 
   res.status(HttpStatusCodes.OK).json(organization);

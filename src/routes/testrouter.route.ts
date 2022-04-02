@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { sayHello } from "../controller/testcontroller.controller";
 
 export const router = express.Router();

@@ -62,7 +62,7 @@ export const deleteRestaurant = async (req: Request, res: Response) => {
   await prisma.restaurant.delete({
     where: {
       id: id,
-    }
+    },
   });
 
   res.status(HttpStatusCodes.NO_CONTENT).json();
@@ -79,8 +79,8 @@ export const getRestaurant = async (req: Request, res: Response) => {
 
   const restaurant = await prisma.restaurant.findUnique({
     where: {
-      id: id
-    }
+      id: id,
+    },
   });
 
   res.status(HttpStatusCodes.OK).json(restaurant);

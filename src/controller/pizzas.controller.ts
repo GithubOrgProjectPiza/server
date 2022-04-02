@@ -4,11 +4,15 @@ import { DataType } from "../datatypes";
 import prisma from "../lib/prisma.lib";
 
 export const addPizza = async (req: Request, res: Response) => {
-  if (typeof req.body.name !== "string" || typeof req.body.description !== "string" || typeof req.body.restaurantId !== "number") {
+  if (
+    typeof req.body.name !== "string" ||
+    typeof req.body.description !== "string" ||
+    typeof req.body.restaurantId !== "number"
+  ) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
       description: DataType.STRING,
-      restaurantId: DataType.NUMBER
+      restaurantId: DataType.NUMBER,
     });
     return;
   }
@@ -17,7 +21,7 @@ export const addPizza = async (req: Request, res: Response) => {
     data: {
       name: req.body.name,
       description: req.body.description,
-      restaurantId: req.body.restaurantId
+      restaurantId: req.body.restaurantId,
     },
   });
 
@@ -31,11 +35,15 @@ export const updatePizza = async (req: Request, res: Response) => {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       id: DataType.NUMBER,
     });
-  } else if (typeof req.body.name !== "string" || typeof req.body.description !== "string" || typeof req.body.restaurantId !== "number") {
+  } else if (
+    typeof req.body.name !== "string" ||
+    typeof req.body.description !== "string" ||
+    typeof req.body.restaurantId !== "number"
+  ) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
       description: DataType.STRING,
-      restaurantId: DataType.NUMBER
+      restaurantId: DataType.NUMBER,
     });
     return;
   }
@@ -65,7 +73,7 @@ export const deletePizza = async (req: Request, res: Response) => {
   await prisma.pizza.delete({
     where: {
       id: id,
-    }
+    },
   });
 
   res.status(HttpStatusCodes.NO_CONTENT).json();
@@ -82,8 +90,8 @@ export const getPizza = async (req: Request, res: Response) => {
 
   const pizza = await prisma.pizza.findUnique({
     where: {
-      id: id
-    }
+      id: id,
+    },
   });
 
   res.status(HttpStatusCodes.OK).json(pizza);

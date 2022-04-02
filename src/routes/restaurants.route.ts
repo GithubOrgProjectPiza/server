@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { addRestaurant, deleteRestaurant, getRestaurant, updateRestaurant } from "../controller/restaurants.controller";
 
 const router = express.Router();
