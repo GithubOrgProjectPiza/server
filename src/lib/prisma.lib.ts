@@ -6,3 +6,4 @@ let prisma: PrismaClient;
 prisma = new PrismaClient();
 
 export default prisma;
+

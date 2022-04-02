@@ -36,13 +36,14 @@
     "nanoid": "^3.3.2",
     "nodemailer": "^6.7.2",
     "prisma": "^3.10.0",
-    "promisify": "^0.0.3",
     "redis": "^4.0.4",
+    "axios": "^0.26.1",
+    "node-fetch": "^3.2.3",
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5"
   },
   "devDependencies": {
     "@types/node": "^8.9.5",
-    "nodemon": "^1.18.4"
+    "nodemon": "^2.0.15"
   }
 }

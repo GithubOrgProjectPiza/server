@@ -58,7 +58,6 @@ model Organization {
   name   String
   domain String
   users  User[]
-  userId Int
 }
 
 enum Role {
