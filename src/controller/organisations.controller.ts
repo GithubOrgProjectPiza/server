@@ -7,7 +7,7 @@ export const addOrganization = async (req: Request, res: Response) => {
   if (typeof req.body.name !== "string" || typeof req.body.domain !== "string") {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
-      description: DataType.STRING,
+      domain: DataType.STRING,
     });
     return;
   }
@@ -32,7 +32,7 @@ export const updateOrganization = async (req: Request, res: Response) => {
   } else if (typeof req.body.name !== "string" || typeof req.body.domain !== "string") {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
-      description: DataType.STRING,
+      domain: DataType.STRING,
     });
     return;
   }
@@ -77,7 +77,7 @@ export const getOrganization = async (req: Request, res: Response) => {
     });
   }
 
-  const organization = await prisma.restaurant.findUnique({
+  const organization = await prisma.organization.findUnique({
     where: {
       id: id,
     },

@@ -79,7 +79,7 @@ export const getOrder = async (req: Request, res: Response) => {
     });
   }
 
-  const order = await prisma.restaurant.findUnique({
+  const order = await prisma.order.findUnique({
     where: {
       id: id,
     },
