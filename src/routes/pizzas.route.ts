@@ -1,8 +1,9 @@
 import express from "express";
-import { addPizza, deletePizza, getPizza, updatePizza } from "../controller/pizzas.controller";
+import { getPizzas, addPizza, deletePizza, getPizza, updatePizza } from "../controller/pizzas.controller";
 
 const router = express.Router();
 
+router.get("/", getPizzas);
 router.get("/:id", getPizza);
 router.post("/", addPizza);
 router.put("/:id", updatePizza);

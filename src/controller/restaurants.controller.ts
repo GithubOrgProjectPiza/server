@@ -85,3 +85,9 @@ export const getRestaurant = async (req: Request, res: Response) => {
 
   res.status(HttpStatusCodes.OK).json(restaurant);
 };
+
+export const getRestaurants = async (_req: Request, res: Response) => {
+  const restaurants = await prisma.restaurant.findMany();
+
+  res.status(HttpStatusCodes.OK).json(restaurants);
+};

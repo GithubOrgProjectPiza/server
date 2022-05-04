@@ -26,13 +26,16 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   }
 });
 
+app.use("/auth", adminRoutes);
+app.use("/order", ordersRoutes);
+app.use("/organization", organizationsRoutes);
+app.use("/pizza", pizzasRoutes);
+app.use("/restaurant", restaurantsRoutes);
+
 async function main() {
-  app.use("/api/auth", adminRoutes);
-  app.use(express.json());
-  app.use("/order", ordersRoutes);
-  app.use("/organization", organizationsRoutes);
-  app.use("/pizza", pizzasRoutes);
-  app.use("/restaurant", restaurantsRoutes);
+  app.get("/", (_req, res) => {
+    res.send("Hello World!");
+  });
 
   app.listen(3000, () => {
     console.log("Server is running on port 3000");

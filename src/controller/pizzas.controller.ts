@@ -96,3 +96,9 @@ export const getPizza = async (req: Request, res: Response) => {
 
   res.status(HttpStatusCodes.OK).json(pizza);
 };
+
+export const getPizzas = async (_req: Request, res: Response) => {
+  const pizzas = await prisma.pizza.findMany();
+
+  res.status(HttpStatusCodes.OK).json(pizzas);
+};
