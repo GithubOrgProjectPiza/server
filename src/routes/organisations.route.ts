@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getOrganizations,
   addOrganization,
   deleteOrganization,
   getOrganization,
@@ -8,6 +9,7 @@ import {
 
 const router = express.Router();
 
+router.get("/", getOrganizations);
 router.get("/:id", getOrganization);
 router.post("/", addOrganization);
 router.put("/:id", updateOrganization);
