@@ -77,7 +77,7 @@ export const getOrganization = async (req: Request, res: Response) => {
     });
   }
 
-  const organization = await prisma.restaurant.findUnique({
+  const organization = await prisma.organization.findUnique({
     where: {
       id: id,
     },

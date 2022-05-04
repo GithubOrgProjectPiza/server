@@ -31,7 +31,7 @@ model Restaurant {
 
 model Pizza {
   id           Int            @id @default(autoincrement())
-  name         String         @unique
+  name         String        
   description  String?
   restaurant   Restaurant     @relation(fields: [restaurantId], references: [id])
   restaurantId Int

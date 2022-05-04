@@ -2,7 +2,6 @@ import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 
 import adminRoutes from "./routes/auth.route";
-const testRoutes = require("./routes/testrouter.route");
 const ordersRoutes = require("./routes/orders.route");
 const organizationsRoutes = require("./routes/organisations.route");
 const pizzasRoutes = require("./routes/pizzas.route");
@@ -27,17 +26,14 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-
 async function main() {
-
   app.use("/api/auth", adminRoutes);
   app.use(express.json());
-  app.use("/tests", testRoutes);
   app.use("/order", ordersRoutes);
   app.use("/organization", organizationsRoutes);
   app.use("/pizza", pizzasRoutes);
   app.use("/restaurant", restaurantsRoutes);
-  
+
   app.listen(3000, () => {
     console.log("Server is running on port 3000");
   });
