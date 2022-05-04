@@ -87,3 +87,9 @@ export const getOrder = async (req: Request, res: Response) => {
 
   res.status(HttpStatusCodes.OK).json(order);
 };
+
+export const getOrders = async (_req: Request, res: Response) => {
+  const orders = await prisma.order.findMany();
+
+  res.status(HttpStatusCodes.OK).json(orders);
+};

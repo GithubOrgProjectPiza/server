@@ -85,3 +85,9 @@ export const getOrganization = async (req: Request, res: Response) => {
 
   res.status(HttpStatusCodes.OK).json(organization);
 };
+
+export const getOrganizations = async (_req: Request, res: Response) => {
+  const organizations = await prisma.organization.findMany();
+
+  res.status(HttpStatusCodes.OK).json(organizations);
+};
