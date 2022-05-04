@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 
 import adminRoutes from "./routes/auth.route";
+import { requireAuthentication } from "./middleware/auth.middle";
 const ordersRoutes = require("./routes/orders.route");
 const organizationsRoutes = require("./routes/organisations.route");
 const pizzasRoutes = require("./routes/pizzas.route");

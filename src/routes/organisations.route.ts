@@ -6,13 +6,14 @@ import {
   getOrganization,
   updateOrganization,
 } from "../controller/organisations.controller";
+import { requireAuthentication } from "../middleware/auth.middle";
 
 const router = express.Router();
 
-router.get("/", getOrganizations);
+router.get("/", requireAuthentication, getOrganizations);
 router.get("/:id", getOrganization);
-router.post("/", addOrganization);
-router.put("/:id", updateOrganization);
-router.delete("/:id", deleteOrganization);
+router.post("/", requireAuthentication, addOrganization);
+router.put("/:id", requireAuthentication, updateOrganization);
+router.delete("/:id", requireAuthentication, deleteOrganization);
 
 module.exports = router;
