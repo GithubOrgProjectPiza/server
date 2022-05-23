@@ -81,13 +81,20 @@ export const getRestaurant = async (req: Request, res: Response) => {
     where: {
       id: id,
     },
+    include: {
+      pizzas: true,
+    }
   });
 
   res.status(HttpStatusCodes.OK).json(restaurant);
 };
 
 export const getRestaurants = async (_req: Request, res: Response) => {
-  const restaurants = await prisma.restaurant.findMany();
+  const restaurants = await prisma.restaurant.findMany({
+    include: {
+      pizzas: true
+    }
+  });
 
   res.status(HttpStatusCodes.OK).json(restaurants);
 };
