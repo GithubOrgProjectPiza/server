@@ -7,12 +7,14 @@ export const addPizza = async (req: Request, res: Response) => {
   if (
     typeof req.body.name !== "string" ||
     typeof req.body.description !== "string" ||
-    typeof req.body.restaurantId !== "number"
+    typeof req.body.restaurantId !== "number" ||
+    typeof req.body.price !== "number"
   ) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
       description: DataType.STRING,
       restaurantId: DataType.NUMBER,
+      price: DataType.NUMBER
     });
     return;
   }
@@ -22,6 +24,7 @@ export const addPizza = async (req: Request, res: Response) => {
       name: req.body.name,
       description: req.body.description,
       restaurantId: req.body.restaurantId,
+      price: req.body.price
     },
   });
 
@@ -38,12 +41,14 @@ export const updatePizza = async (req: Request, res: Response) => {
   } else if (
     typeof req.body.name !== "string" ||
     typeof req.body.description !== "string" ||
-    typeof req.body.restaurantId !== "number"
+    typeof req.body.restaurantId !== "number" ||
+    typeof req.body.price !== "number"
   ) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
       description: DataType.STRING,
       restaurantId: DataType.NUMBER,
+      price: DataType.NUMBER
     });
     return;
   }
@@ -55,6 +60,7 @@ export const updatePizza = async (req: Request, res: Response) => {
     data: {
       name: req.body.name,
       description: req.body.description,
+      price: req.body.price
     },
   });
 
