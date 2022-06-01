@@ -41,7 +41,8 @@ export const updatePizza = async (req: Request, res: Response) => {
   } else if (
     typeof req.body.name !== "string" ||
     typeof req.body.description !== "string" ||
-    typeof req.body.restaurantId !== "number"
+    typeof req.body.restaurantId !== "number" ||
+    typeof req.body.price !== "number"
   ) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
       name: DataType.STRING,
