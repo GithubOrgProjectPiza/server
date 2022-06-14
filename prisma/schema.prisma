@@ -30,28 +30,20 @@ model Restaurant {
 }
 
 model Pizza {
-  id           Int            @id @default(autoincrement())
-  name         String        
+  id           Int        @id @default(autoincrement())
+  name         String
   description  String?
   price        Decimal
-  restaurant   Restaurant     @relation(fields: [restaurantId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId Int
-  orders       PizzaToOrder[]
+  orders       Order[]
 }
 
 model Order {
-  id     Int            @id @default(autoincrement())
-  user   User           @relation(fields: [userId], references: [id])
+  id     Int     @id @default(autoincrement())
+  user   User    @relation(fields: [userId], references: [id])
   userId Int
-  pizzas PizzaToOrder[]
-}
-
-model PizzaToOrder {
-  id      Int   @id @default(autoincrement())
-  order   Order @relation(fields: [orderId], references: [id])
-  orderId Int
-  pizza   Pizza @relation(fields: [pizzaId], references: [id])
-  pizzaId Int
+  pizzas Pizza[]
 }
 
 model Organization {
@@ -65,6 +57,7 @@ enum Role {
   USER
   ADMIN
 }
+
 enum Status {
   UNVERIFIED
   VERIFIED

@@ -12,7 +12,11 @@ export let mailAccount = {
 let transporter =
   process.env.DEV == "true" || process.env.DOMAIN == undefined
     ? (async () => {
-        mailAccount = await nodemailer.createTestAccount();
+        //mailAccount = await nodemailer.createTestAccount();
+        mailAccount = {
+          user: "m3v2a6gnc4dunaxu@ethereal.email",
+          pass: "24yk6juHY8PzftcGTa",
+        };
         //mailAccount = {
         //  user: "",
         //  pass: "",
@@ -64,7 +68,7 @@ export const verificationMail = async (to: string, id: string) => {
   //TODO: Replace other handlebars with final values
   const message = Handlebars.compile(raw);
 
-  const data = {};
+  const data = { link: id };
   const compiled = message(data);
 
   sendMail(mailAccount.user, to, "Verify Email", undefined, compiled);

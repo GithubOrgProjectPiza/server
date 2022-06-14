@@ -29,7 +29,12 @@ export const addOrder = async (req: Request, res: Response) => {
         connect: pizzas,
       },
     },
+    select: {
+      pizzas: true,
+    },
   });
+
+  console.log(order);
 
   res.status(HttpStatusCodes.CREATED).json(order);
 };
@@ -93,13 +98,26 @@ export const getOrder = async (req: Request, res: Response) => {
     where: {
       id: id,
     },
+    select: {
+      id: true,
+      pizzas: true,
+      user: true,
+      userId: true,
+    },
   });
 
   res.status(HttpStatusCodes.OK).json(order);
 };
 
 export const getOrders = async (_req: Request, res: Response) => {
-  const orders = await prisma.order.findMany();
+  const orders = await prisma.order.findMany({
+    select: {
+      id: true,
+      pizzas: true,
+      user: true,
+      userId: true,
+    },
+  });
 
   res.status(HttpStatusCodes.OK).json(orders);
 };

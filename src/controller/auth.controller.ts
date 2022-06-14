@@ -28,14 +28,7 @@ const ROLES: readonly string[] = [Role.ADMIN, Role.USER];
 export const register = async (req: Request, res: Response) => {
   const { name, password, role, organization } = req.body || {};
 
-  if (
-    !(
-      typeof name === "string" &&
-      typeof password === "string" &&
-      ROLES.includes(role) &&
-      typeof organization === "number"
-    )
-  ) {
+  if (!(typeof name === "string" && typeof password === "string" && typeof organization === "number")) {
     return res.status(400).json(
       createDefaultError("Request body does not match required parameters", {
         name: "string",
@@ -53,7 +46,7 @@ export const register = async (req: Request, res: Response) => {
     return res.status(404).json(createDefaultError(`Could not find organization with id ${organization}`, {}));
   }
 
-  if (role ? ("USER" as Role) === Role.ADMIN : Role) {
+  if ((role ?? ("USER" as Role)) === Role.ADMIN) {
     if (req.auth?.role !== Role.ADMIN) {
       return res.status(401).json(createDefaultError(`Unauthorized`, {}));
     }
@@ -65,7 +58,7 @@ export const register = async (req: Request, res: Response) => {
       passwordSalt: "salty",
       passwordHash: hash,
       role: role as Role,
-      status: role === Role.ADMIN ? Status.UNVERIFIED : Status.ENABLED,
+      status: role === Role.ADMIN ? Status.ENABLED : Status.ENABLED,
       organization: { connect: { id: organization } || undefined },
     },
     select: {
