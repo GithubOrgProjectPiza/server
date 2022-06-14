@@ -45,8 +45,8 @@ export const register = async (req: Request, res: Response) => {
     );
   }
 
-  const hash = await argon2.hash("salty" + password + "salty",{
-    type: argon2.argon2id
+  const hash = await argon2.hash("salty" + password + "salty", {
+    type: argon2.argon2id,
   });
 
   if (!(await prisma.organization.findUnique({ where: { id: organization } }))) {
@@ -96,8 +96,8 @@ export const authenthicate = async (req: Request, res: Response) => {
     );
   }
 
-  const hash = await argon2.hash("salty" + password + "salty",{
-    type: argon2.argon2id
+  const hash = await argon2.hash("salty" + password + "salty", {
+    type: argon2.argon2id,
   });
 
   const user = await prisma.user.findUnique({ where: { email: name } });
@@ -106,7 +106,7 @@ export const authenthicate = async (req: Request, res: Response) => {
     return res.status(403).json(createDefaultError("Username or Password wrong", {}));
   }
 
-  if (await argon2.verify(user.passwordHash,hash)) {
+  if (await argon2.verify(user.passwordHash, hash)) {
     return res.status(403).json(createDefaultError("Username or Password wrong", {}));
   }
 
@@ -117,7 +117,7 @@ export const authenthicate = async (req: Request, res: Response) => {
 
   req.headers.authorization = jwt.sign(userjwt, JWT_SECRET);
 
-  res.status(200).json(createDefaultSucces("Logged in succesfully",{}))
+  res.status(200).json(createDefaultSucces("Logged in succesfully", { token: req.headers.authorization }));
 };
 
 export const verifyEmail = async (req: Request, res: Response) => {

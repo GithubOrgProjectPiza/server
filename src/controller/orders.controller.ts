@@ -2,22 +2,32 @@ import { Request, Response } from "express";
 import { HttpStatusCodes } from "../statusCodes";
 import { DataType } from "../datatypes";
 import prisma from "../lib/prisma.lib";
+import { connect } from "net";
 
 export const addOrder = async (req: Request, res: Response) => {
-  if (typeof req.body.userId !== "number" || !Array.isArray(req.body.pizzas)) {
+  if (!Array.isArray(req.body.pizzas)) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({
-      userId: DataType.NUMBER,
       pizzas: DataType.ARRAY,
     });
     return;
   }
+  const userId = req.auth?.id;
+  if (!userId) return res.status(500).json();
 
   console.log(req.body.pizzas);
 
+  const pizzas = req.body.pizzas.map((a: number) => ({
+    id: a,
+  }));
+
+  console.log(pizzas);
+
   const order = await prisma.order.create({
     data: {
-      userId: req.body.userId,
-      pizzas: req.body.pizzas,
+      userId: userId,
+      pizzas: {
+        connect: pizzas,
+      },
     },
   });
 
